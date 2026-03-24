@@ -1066,6 +1066,14 @@ body[data-mode="student"] .turma-bar{display:none!important}
         <div class="val" id="autoav-nota-final">0 / 20</div>
       </div>
 
+      <!-- Comentário opcional -->
+      <div class="card" style="margin-top:14px;padding:16px;border:1.5px solid var(--border)">
+        <div style="font-size:.82rem;font-weight:700;color:var(--primary);margin-bottom:6px">💬 Comentário / Opinião <span style="font-weight:400;color:var(--muted)">(opcional)</span></div>
+        <textarea id="autoav-comentario" rows="3" placeholder="Deixa aqui um breve comentário, reflexão ou opinião sobre o teu desempenho nesta disciplina..."
+          style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;
+          font-family:inherit;font-size:.84rem;resize:vertical;min-height:60px;line-height:1.5"></textarea>
+      </div>
+
       <div id="autoav-form-no-url-warn" style="display:none;background:#FEF3C7;
            border:1px solid #FCD34D;border-radius:8px;padding:12px 14px;
            font-size:.82rem;color:#92400E;margin-top:10px;text-align:center">
@@ -5243,6 +5251,8 @@ async function submitAutoAv(){
   });
   notaFinal = Math.round(notaFinal*10)/10;
 
+  const comentario = (document.getElementById('autoav-comentario')||{}).value||'';
+
   const record = {
     nome: _avNome,
     disciplina: cfg.disciplina,
@@ -5251,6 +5261,7 @@ async function submitAutoAv(){
     data: cfg.data || '',
     vetores: vetoresData,
     notaFinal,
+    comentario: comentario.trim(),
     ts: new Date().toISOString()
   };
 
@@ -5303,10 +5314,10 @@ async function submitAutoAv(){
 // ── Post-submit actions ──────────────────────────────────────────────
 function autoavRepetir(){
   document.getElementById('autoav-success').style.display='none';
-  // Keep discipline loaded, clear name for next student
   _avNome=''; _avRatings={};
   document.getElementById('av-primeiro').value='';
   document.getElementById('av-ultimo').value='';
+  var cmt=document.getElementById('autoav-comentario'); if(cmt) cmt.value='';
   // Re-show the single view
   const cfg = window._lastAutoAvCfg || loadAutoAvCfg();
   setActiveAutoAv(cfg);
