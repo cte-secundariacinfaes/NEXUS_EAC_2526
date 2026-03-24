@@ -424,7 +424,8 @@ function handleAutoAvSubmit(ss, d) {
     ...vetorHeaders,
     ...vetorContrib,
     "Nota Final /20",
-    ...pesos
+    ...pesos,
+    "Comentário"
   ];
 
   const sh = ensureDynamicSheet(ss, sheetName, hdrs, AA_HDR_BG);
@@ -445,7 +446,8 @@ function handleAutoAvSubmit(ss, d) {
     ...vetores.map(v => v.subtotal  || 0),            // V /20  (one per vetor)
     ...vetores.map(v => v.contrib   || 0),            // V contrib.
     record.notaFinal  || 0,                           // Nota Final /20
-    ...vetores.map(v => v.peso      || 0)             // V peso%
+    ...vetores.map(v => v.peso      || 0),            // V peso%
+    record.comentario || ""                             // Comentário
   ];
 
   sh.appendRow(row);
