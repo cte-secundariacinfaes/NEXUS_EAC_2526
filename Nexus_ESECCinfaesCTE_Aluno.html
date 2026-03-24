@@ -1121,10 +1121,10 @@ body[data-mode="student"] .turma-bar{display:none!important}
       <div id="autoav-disc-list"></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
         <button class="btn btn-primary btn-sm" onclick="addAutoAvDisc()">＋ Adicionar Disciplina</button>
-        <button class="btn btn-outline btn-sm" onclick="saveCurrentAutoAvToList()">💾 Guardar Atual na Lista</button>
+        <button class="btn btn-outline btn-sm" onclick="saveCurrentAutoAvToList()">💾 Guardar Disciplina</button>
       </div>
       <p style="font-size:.72rem;color:var(--muted);margin-top:8px">
-        Configura cada disciplina abaixo (secção "Configuração") e clica "💾 Guardar Atual na Lista" para a adicionar.
+        Configura cada disciplina abaixo (secção "Configuração") e clica "💾 Guardar Disciplina" para a adicionar.
         Se tiveres apenas uma disciplina, funciona como antes.
       </p>
     </div>
@@ -4959,7 +4959,7 @@ function renderAutoAvDiscList(){
   const el = document.getElementById('autoav-disc-list');
   if(!el) return;
   if(!list.length){
-    el.innerHTML='<p style="color:var(--muted);font-size:.82rem;text-align:center;padding:10px">Sem disciplinas. Configura abaixo e clica "💾 Guardar Atual na Lista".</p>';
+    el.innerHTML='<p style="color:var(--muted);font-size:.82rem;text-align:center;padding:10px">Sem disciplinas. Configura abaixo e clica "💾 Guardar Disciplina".</p>';
     return;
   }
   el.innerHTML = list.map((cfg,i)=>{
@@ -4977,14 +4977,19 @@ function renderAutoAvDiscList(){
 }
 
 function saveCurrentAutoAvToList(){
-  const cfg = loadAutoAvCfg();
-  if(!cfg.disciplina){ toast('Preenche a disciplina antes de guardar.','warn'); return; }
-  if(!cfg.id) cfg.id = 'av_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,5);
-  // Also update the saved config with the id
-  saveAutoAvCfg(cfg);
-  updateAutoAvInList(cfg);
+  // First save form to localStorage (same logic as saveAutoAvCfgUI)
+  var formCfg = readAutoAvForm();
+  if(!formCfg) return; // validation failed
+  
+  // Preserve the id from the current active config
+  var existing = loadAutoAvCfg();
+  if(existing.id) formCfg.id = existing.id;
+  if(!formCfg.id) formCfg.id = 'av_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,5);
+  
+  saveAutoAvCfg(formCfg);
+  updateAutoAvInList(formCfg);
   renderAutoAvDiscList();
-  toast('💾 "'+cfg.disciplina+'" guardada na lista!');
+  toast('💾 "'+formCfg.disciplina+'" guardada na lista!');
 }
 
 function addAutoAvDisc(){
@@ -5367,7 +5372,7 @@ function renderAutoAvCfg(){
       ${getWeightMsg(cfg)}
     </div>
     <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
-      <button class="btn btn-primary" onclick="saveAutoAvCfgUI()">💾 Guardar Configuração</button>
+      <button class="btn btn-primary" onclick="saveAutoAvCfgUI()">💾 Guardar Rascunho</button>
     </div>
 
     <div id="autoav-qr-section" style="display:none;margin-top:16px">
@@ -5451,27 +5456,37 @@ function updateWeightBar(){
     bar.textContent='⚠️ Pesos somam '+total+'% — devem somar exactamente 100%';}
 }
 
-function saveAutoAvCfgUI(){
-  const cfg = {
+function readAutoAvForm(){
+  var cfg = {
     disciplina: document.getElementById('avcfg-disciplina')?.value.trim()||'',
     ano:        document.getElementById('avcfg-ano')?.value.trim()||'',
     anoLetivo:  document.getElementById('avcfg-anoletivo')?.value.trim()||'',
     data:       document.getElementById('avcfg-data')?.value||'',
-    vetores: [0,1,2].map(vi=>({
+    vetores: [0,1,2].map(function(vi){return {
       id: 'v'+(vi+1),
       nome:  document.getElementById('avcfg-v'+vi+'-nome')?.value.trim()||'Vetor '+(vi+1),
       abrev: document.getElementById('avcfg-v'+vi+'-abrev')?.value.trim()||'',
       peso: Number(document.getElementById('avcfg-v'+vi+'-peso')?.value)||0,
-      caracteristicas: [0,1,2,3].map(ci=>
-        document.getElementById('avcfg-v'+vi+'-c'+ci)?.value.trim()||'Característica '+(ci+1)
-      )
-    }))
+      caracteristicas: [0,1,2,3].map(function(ci){
+        return document.getElementById('avcfg-v'+vi+'-c'+ci)?.value.trim()||'Característica '+(ci+1);
+      })
+    };})
   };
-  const total=cfg.vetores.reduce((a,v)=>a+v.peso,0);
-  if(total!==100){toast('⚠️ Os pesos têm de somar 100%. Actualmente: '+total+'%','warn');return;}
+  if(!cfg.disciplina){ toast('Preenche a disciplina.','warn'); return null; }
+  var total=cfg.vetores.reduce(function(a,v){return a+v.peso;},0);
+  if(total!==100){toast('⚠️ Os pesos têm de somar 100%. Actualmente: '+total+'%','warn');return null;}
+  return cfg;
+}
+
+function saveAutoAvCfgUI(){
+  var cfg = readAutoAvForm();
+  if(!cfg) return;
+  // Preserve id
+  var existing = loadAutoAvCfg();
+  if(existing.id) cfg.id = existing.id;
   saveAutoAvCfg(cfg);
   toast('✅ Configuração guardada!');
-  renderAutoAvCfg(); // stay on config page — just refresh the config UI
+  renderAutoAvCfg();
 }
 
 // ── QR / Share ────────────────────────────────────────────────────────
