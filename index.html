@@ -29,93 +29,92 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
   margin-bottom:6px;line-height:1.15}
 .hero h1 span{background:linear-gradient(90deg,#38BDF8,#34D399);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:clamp(.88rem,2vw,1.05rem);opacity:.7;max-width:480px;margin:0 auto;
+.hero p{font-size:clamp(.88rem,2vw,1.05rem);opacity:.7;max-width:520px;margin:0 auto;
   line-height:1.6;font-weight:400}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
-  border-radius:20px;padding:5px 16px;font-size:.75rem;font-weight:600;
-  margin-top:18px;backdrop-filter:blur(8px)}
 
 /* ── CARDS ── */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;max-width:740px;margin:-36px auto 0;padding:0 20px;position:relative;z-index:2}
-.entry-card{background:var(--card);border-radius:20px;padding:32px 28px;
-  text-decoration:none;color:var(--text);transition:all .25s;
-  border:2px solid transparent;position:relative;overflow:hidden;
-  box-shadow:0 4px 24px rgba(0,0,0,.06),0 1px 4px rgba(0,0,0,.04)}
-.entry-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;transition:.25s}
-.entry-card:hover{transform:translateY(-6px);
-  box-shadow:0 12px 40px rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.06)}
+.cards{max-width:960px;margin:-30px auto 0;padding:0 20px;position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
 
-.card-prof::before{background:linear-gradient(90deg,var(--blue),var(--accent))}
+.entry-card{display:flex;flex-direction:column;align-items:center;text-align:center;
+  background:var(--card);border-radius:16px;padding:32px 24px 24px;text-decoration:none;
+  color:var(--text);box-shadow:0 4px 24px rgba(15,36,71,.08);
+  border:2px solid transparent;transition:all .25s ease;position:relative;overflow:hidden}
+.entry-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(15,36,71,.14)}
+.entry-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.card-prof::before{background:linear-gradient(90deg,var(--accent),var(--purple))}
 .card-prof:hover{border-color:var(--accent)}
 .card-aluno::before{background:linear-gradient(90deg,var(--green),var(--teal))}
 .card-aluno:hover{border-color:var(--green)}
+.card-tools::before{background:linear-gradient(90deg,#22c55e,#16a34a)}
+.card-tools:hover{border-color:#22c55e}
 
-.card-icon{font-size:2.6rem;margin-bottom:14px;display:block}
-.card-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
-  color:var(--muted);margin-bottom:6px}
-.card-title{font-size:1.25rem;font-weight:800;margin-bottom:8px;line-height:1.2}
-.card-desc{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:18px}
-.card-btn{display:inline-flex;align-items:center;gap:6px;
-  padding:10px 22px;border-radius:12px;font-weight:700;font-size:.84rem;
-  color:#fff;transition:.2s;text-decoration:none}
-.card-btn.blue{background:linear-gradient(135deg,var(--blue),var(--accent));
-  box-shadow:0 3px 12px rgba(2,132,199,.3)}
-.card-btn.green{background:linear-gradient(135deg,var(--green),var(--teal));
-  box-shadow:0 3px 12px rgba(5,150,105,.3)}
-.card-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
-.card-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
-.feat{font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:8px;
-  background:#F1F5F9;color:var(--muted)}
+.card-icon{font-size:2.8rem;margin-bottom:10px;display:block}
+.card-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);
+  font-weight:600;margin-bottom:4px}
+.card-title{font-size:1.3rem;font-weight:800;margin-bottom:8px}
+.card-desc{font-size:.85rem;color:var(--muted);line-height:1.5;margin-bottom:14px;flex:1}
+.card-features{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:16px}
+.feat{font-size:.72rem;background:#F1F5F9;color:var(--muted);padding:3px 10px;
+  border-radius:20px;font-weight:500}
+
+.card-btn{display:inline-block;padding:10px 28px;border-radius:10px;font-weight:700;
+  font-size:.88rem;letter-spacing:.02em;transition:all .2s}
+.card-btn.blue{background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff}
+.card-btn.green{background:linear-gradient(135deg,var(--green),var(--teal));color:#fff}
+.card-btn.pcb{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff}
 
 /* ── INFO ── */
-.info-section{max-width:740px;margin:36px auto 0;padding:0 20px 60px;width:100%}
-.info-card{background:var(--card);border-radius:16px;padding:24px;
-  box-shadow:0 1px 8px rgba(0,0,0,.04)}
-.info-card h3{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:12px;
-  display:flex;align-items:center;gap:8px}
-.steps{display:grid;gap:10px;counter-reset:step}
-.step{display:flex;gap:12px;align-items:baseline;font-size:.84rem;line-height:1.6;color:#374151}
-.step::before{counter-increment:step;content:counter(step);
-  min-width:28px;height:28px;background:linear-gradient(135deg,var(--navy),var(--accent));
-  color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.78rem;font-weight:800;flex-shrink:0}
-.step code{font-family:'JetBrains Mono',monospace;font-size:.78rem;
-  background:#F1F5F9;padding:2px 8px;border-radius:6px;color:var(--accent)}
+.info-section{max-width:960px;margin:36px auto 0;padding:0 20px}
+.info-card{background:var(--card);border-radius:14px;padding:28px;
+  box-shadow:0 2px 16px rgba(15,36,71,.06)}
+.info-card h3{font-size:1.1rem;font-weight:700;margin-bottom:14px;color:var(--navy)}
+.steps{counter-reset:step}
+.step{counter-increment:step;padding:8px 0 8px 42px;position:relative;
+  font-size:.88rem;color:var(--muted);line-height:1.6;
+  border-left:2px solid #E2E8F0;margin-left:14px}
+.step::before{content:counter(step);position:absolute;left:-15px;top:6px;
+  width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700}
+.step strong{color:var(--text)}
+.step code{font-family:'JetBrains Mono',monospace;font-size:.82rem;
+  background:#F1F5F9;padding:1px 6px;border-radius:4px;color:var(--accent)}
 
-.footer{text-align:center;padding:20px;font-size:.72rem;color:var(--muted);
-  border-top:1px solid #E2E8F0;margin-top:auto}
+/* ── FOOTER ── */
+.footer{margin-top:auto;padding:24px;text-align:center;font-size:.78rem;
+  color:var(--muted);line-height:1.8}
 .footer a{color:var(--accent);text-decoration:none}
+.footer a:hover{text-decoration:underline}
 
 @media(max-width:600px){
-  .hero{padding:40px 20px 40px}
-  .cards{margin-top:-28px;gap:14px}
-  .entry-card{padding:24px 20px}
+  .hero{padding:40px 16px 36px}
+  .cards{grid-template-columns:1fr;margin-top:-20px;padding:0 12px}
+  .entry-card{padding:24px 18px 20px}
 }
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <span class="hero-icon">🏫</span>
+  <span class="hero-icon">🔗</span>
   <h1>Nexus <span>ESECCinfãesCTE</span></h1>
-  <p>Sistema de avaliação, autoavaliação e controlo de presenças para o Curso Profissional EAC.</p>
-  <div class="hero-badge">📡 Ligado ao Google Sheets · Funciona offline</div>
+  <p>Plataforma de avaliação, presenças e ferramentas técnicas para o Curso Profissional EAC</p>
 </div>
 
 <div class="cards">
 
-  <a class="entry-card card-prof" href="Nexus_ESECCinfaesCTE_Professor.html">
-    <span class="card-icon">🛡️</span>
-    <div class="card-label">Área restrita</div>
+  <a class="entry-card card-prof" href="Nexus_ESECCinfaesCTE.html">
+    <span class="card-icon">👨‍🏫</span>
+    <div class="card-label">Área do professor</div>
     <div class="card-title">Professor</div>
-    <div class="card-desc">Configuração, gestão de alunos, sessões de aula, painel de presenças, relatórios e avaliação.</div>
+    <div class="card-desc">Gestão de turmas, sessões de avaliação, presenças de estágio e aulas práticas, relatórios e exportação.</div>
     <div class="card-features">
       <span class="feat">⚙️ Gerir</span>
-      <span class="feat">📋 Avaliar</span>
+      <span class="feat">🗳️ Pares</span>
+      <span class="feat">✍️ Autoavaliação</span>
+      <span class="feat">📍 Estágio</span>
+      <span class="feat">📝 Aulas</span>
       <span class="feat">📊 Relatórios</span>
-      <span class="feat">📡 Publicar</span>
     </div>
     <span class="card-btn blue">▶ Entrar como Professor</span>
   </a>
@@ -134,34 +133,30 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
     <span class="card-btn green">▶ Entrar como Aluno</span>
   </a>
 
-</div>
+  <a class="entry-card card-tools" href="Nexus_ESECCinfaesCTE_Perfboard.html">
+    <span class="card-icon">⊞</span>
+    <div class="card-label">Ferramenta técnica</div>
+    <div class="card-title">Perfboard Designer</div>
+    <div class="card-desc">Projetar ligações em placas PCB pré-perfuradas e breadboards. Biblioteca de componentes, impressão de esquemas, guardar projetos.</div>
+    <div class="card-features">
+      <span class="feat">🔌 Perfboard</span>
+      <span class="feat">🍞 Breadboard</span>
+      <span class="feat">📦 Biblioteca</span>
+      <span class="feat">🖨️ Imprimir</span>
+      <span class="feat">💾 Guardar</span>
+      <span class="feat">🎨 Nets</span>
+    </div>
+    <span class="card-btn pcb">▶ Abrir Perfboard Designer</span>
+  </a>
 
-<!-- Quick links bar -->
-<div style="max-width:740px;margin:16px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-  <a href="Nexus_ESECCinfaesCTE_Code.gs" download="Nexus_ESECCinfaesCTE_Code.gs"
-     style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
-     background:var(--card);border-radius:10px;text-decoration:none;color:var(--text);
-     font-size:.82rem;font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,.06);
-     border:1.5px solid var(--border);transition:.2s"
-     onmouseenter="this.style.borderColor='#D97706'" onmouseleave="this.style.borderColor=''">
-    📥 <span>Descarregar Code.gs</span>
-  </a>
-  <a href="Nexus_ESECCinfaesCTE_Manual.html"
-     style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
-     background:var(--card);border-radius:10px;text-decoration:none;color:var(--text);
-     font-size:.82rem;font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,.06);
-     border:1.5px solid var(--border);transition:.2s"
-     onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor=''">
-    📖 <span>Manual de Utilização</span>
-  </a>
 </div>
 
 <div class="info-section">
   <div class="info-card">
-    <h3>🚀 Configuração Inicial</h3>
+    <h3>🚀 Configuração Inicial (Nexus Avaliações)</h3>
     <div class="steps">
       <div class="step">Cria um <strong>Google Sheets</strong> novo e abre <code>Extensões → Apps Script</code></div>
-      <div class="step">Cola o código do ficheiro <code>Code.gs</code> (descarrega acima com 📥) e implementa como <strong>Aplicação Web</strong></div>
+      <div class="step">Cola o código do ficheiro <code>Nexus_ESECCinfaesCTE_Code.gs</code> e implementa como <strong>Aplicação Web</strong></div>
       <div class="step">Abre o <strong>Professor</strong>, cola o URL do Apps Script em <code>⚙️ Gerir → Google Sheets</code></div>
       <div class="step">Configura turma, alunos, locais de estágio e sessões de aula</div>
       <div class="step">Clica <strong>📡 Publicar Configuração</strong> — os alunos recebem tudo automaticamente</div>
@@ -172,7 +167,8 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 
 <footer class="footer">
   Nexus ESECCinfãesCTE · ES/3 Prof. Dr. Flávio F. Pinto Resende · Curso EAC<br>
-  Desenvolvido por <a href="#">Avelino A. Colaço</a> · <a href="Nexus_ESECCinfaesCTE_Manual.html">📖 Manual</a>
+  Desenvolvido por <a href="#">Avelino A. Colaço</a> ·
+  <a href="Nexus_ESECCinfaesCTE_Manual.html">📖 Manual</a>
 </footer>
 
 </body>
