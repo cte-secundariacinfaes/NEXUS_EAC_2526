@@ -2095,7 +2095,31 @@ const PerfboardDesigner = function PerfboardDesigner() {
       cursor: "pointer",
       border: color === c ? "2px solid #fff" : "2px solid #333"
     }
-  })))), tool === "ic" && /*#__PURE__*/React.createElement("div", {
+  })))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderTop: "1px solid #1e293b",
+      margin: "3px 0",
+      paddingTop: 4,
+      display: "flex",
+      flexDirection: "column",
+      gap: 2
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: secTitle
+  }, "BIBLIOTECA / COMPONENTES"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowLibrary(true),
+    style: btn(false, "#1abc9c")
+  }, "\u25EB Abrir biblioteca"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setShowCreator(true);
+      setCreatorPins({});
+      setCreatorName("");
+    },
+    style: {
+      ...btn(false, "#f39c12"),
+      fontWeight: 600
+    }
+  }, "+ Criar componente")), tool === "ic" && /*#__PURE__*/React.createElement("div", {
     style: {
       borderTop: "1px solid #1e293b",
       paddingTop: 4
@@ -2358,30 +2382,6 @@ const PerfboardDesigner = function PerfboardDesigner() {
       fontSize: 8
     }
   }, "\u2715 Remover imagem"))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      borderTop: "1px solid #1e293b",
-      margin: "3px 0",
-      paddingTop: 4,
-      display: "flex",
-      flexDirection: "column",
-      gap: 2
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: secTitle
-  }, "BIBLIOTECA"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setShowLibrary(true),
-    style: btn(false, "#1abc9c")
-  }, "\u25EB Abrir biblioteca"), /*#__PURE__*/React.createElement("button", {
-    onClick: () => {
-      setShowCreator(true);
-      setCreatorPins({});
-      setCreatorName("");
-    },
-    style: {
-      ...btn(false, "#f39c12"),
-      fontWeight: 600
-    }
-  }, "+ Criar componente")), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: "auto",
       padding: "4px 0",
@@ -3053,7 +3053,6 @@ const PerfboardDesigner = function PerfboardDesigner() {
   }, "\uD83D\uDCBE Guardar componente"))));
 };
 
-// Mount
 ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(PerfboardDesigner));
 </script>
 </body>
