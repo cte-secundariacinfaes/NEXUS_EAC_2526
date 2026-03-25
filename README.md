@@ -60,16 +60,30 @@ Aluno.html      ──🔄 Carregar───→  Google Sheets (lê config + esc
 - Importar/exportar backups por turma
 - Recuperação total via 📥 Importar do Sheets
 
+### ⊞ Perfboard Designer
+- Projetar ligações em placas PCB pré-perfuradas (5 tamanhos ELEGOO) e breadboards (half/full)
+- 10 ferramentas: fio, resistência, condensador, LED, díodo, CI, header, jumper, etiqueta, biblioteca
+- Biblioteca com 15+ componentes pré-definidos (DIP-8/14/16/28, Arduino Nano, ESP32, módulo relé, etc.)
+- Criador de componentes personalizados (nome, tamanho, pinos, cor)
+- Deteção automática de nets e alertas de conflito (curto-circuito)
+- Vista frente + verso (lado do cobre espelhado)
+- Drag-and-drop e edição inline de etiquetas
+- Imagem de fundo (overlay de esquema elétrico)
+- Guardar no browser (localStorage) ou como ficheiro `.perfboard.json`
+- Imprimir esquema A4 com tabela de ligações, BOM e espaço para notas
+- 100% offline — não precisa de Google Sheets
+
 ---
 
 ## Ficheiros
 
 | Ficheiro | Descrição | Tamanho |
 |----------|-----------|---------|
-| `index.html` | Landing page com links para Professor e Aluno | 8K |
+| `index.html` | Landing page com links para Professor, Aluno e Perfboard | 9K |
 | `Nexus_ESECCinfaesCTE_Professor.html` | Área do professor — gestão, configuração, relatórios | 390K |
 | `Nexus_ESECCinfaesCTE_Aluno.html` | Área dos alunos — votar, autoavaliar, marcar presenças | 366K |
-| `Nexus_ESECCinfaesCTE_Manual.html` | Manual de utilização com sidebar navegável | 34K |
+| `Nexus_ESECCinfaesCTE_Perfboard.html` | Perfboard Designer — projetar PCBs e breadboards | 90K |
+| `Nexus_ESECCinfaesCTE_Manual.html` | Manual de utilização com sidebar navegável | 40K |
 | `Nexus_ESECCinfaesCTE_Code.gs` | Google Apps Script — backend (23 ações) | 39K |
 
 ---
@@ -79,7 +93,7 @@ Aluno.html      ──🔄 Carregar───→  Google Sheets (lê config + esc
 ### 1. GitHub Pages (5 minutos)
 
 1. Cria um repositório **público** no GitHub
-2. Faz upload dos 5 ficheiros + este README
+2. Faz upload dos 6 ficheiros + este README
 3. Vai a **Settings → Pages → Deploy from branch → main / root → Save**
 4. Aguarda 1–2 minutos — o URL fica disponível em `https://teuuser.github.io/nexus-eseccinfaescte/`
 
@@ -126,7 +140,10 @@ O aluno abre o link, cola o URL na primeira vez, e fica guardado permanentemente
 │  .html       │ ←──────────────────  ┌────────▼─────────┐
 └─────────────┘     JSON response     │  Google Sheets    │
                                       │  (13+ folhas)     │
-                                      └──────────────────┘
+┌─────────────┐                       └──────────────────┘
+│  Perfboard   │  (100% offline — localStorage apenas)
+│  .html       │
+└─────────────┘
 ```
 
 ### Armazenamento local
